@@ -4,7 +4,7 @@ import React from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import PosrCard from '../PosrCard/PosrCard'
 import Spinner from '../Spinner/Spinner'
-import { Helmet } from 'react-helmet-async'
+
 
 export default function PostDetails() {
 
@@ -49,9 +49,7 @@ export default function PostDetails() {
     <>
       {cameFromNotifications && (
         <div className="max-w-xl mx-auto px-4 pt-3 mt-3">
-           <Helmet>
-                          <title>  Post Details | Eltaranisi Posts </title>
-                      </Helmet>
+           
           <button
             onClick={() =>
               navigate("/notifications", {
