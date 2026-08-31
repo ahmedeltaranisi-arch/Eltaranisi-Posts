@@ -12,6 +12,7 @@ import CommentCard from "../CommentCard/CommentCard";
 import CreateCommentCard from "../CreateCommentCard/CreateCommentCard";
 import Spinner from "../Spinner/Spinner";
 import DropDownAction from "../DropDownAction/DropDownAction";
+import { Helmet } from "react-helmet";
 import {
   getSavedPostIds,
   isPostSaved,
@@ -326,8 +327,7 @@ export default function Profile() {
 
   const [coverUrl, setCoverUrl] = useState(() => {
     return (
-      localStorage.getItem("coverUrl") ||
-      "https://images.unsplash.com/photo-1549880338-65ddcdfd017b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max"
+      localStorage.getItem("coverUrl") || "/default-cover.jpg" // يرجى التأكد من وضع صورة بهذا الاسم داخل مجلد public لتجنب مشاكل الروابط الخارجية
     );
   });
 
@@ -364,11 +364,24 @@ export default function Profile() {
   const handleChangeCover = (e) => {
     const file = e.target.files?.[0];
     if (file) {
+      // حماية سعة المتصفح: منع رفع صورة أكبر من 1.5 ميجا بايت
+      if (file.size > 1.5 * 1024 * 1024) {
+        alert(
+          "حجم الصورة كبير جداً! يرجى اختيار صورة بحجم أقل من 1.5 ميجابايت ليتم حفظها بنجاح.",
+        );
+        return;
+      }
+
       const reader = new FileReader();
       reader.onloadend = () => {
         const base64Image = reader.result;
-        setCoverUrl(base64Image);
-        localStorage.setItem("coverUrl", base64Image);
+        try {
+          setCoverUrl(base64Image);
+          localStorage.setItem("coverUrl", base64Image);
+        } catch (error) {
+          console.error("Storage quota exceeded:", error);
+          alert("تعذر حفظ الصورة في ذاكرة المتصفح بسبب كبر حجمها.");
+        }
       };
       reader.readAsDataURL(file);
     }
