@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { CounterContext } from "../../Context/CounterContext";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
-import logoImg from "../assets/eltaranisi.png";
 // 1. استيراد سياق الإشعارات
 import { NotificationContext } from "../../Context/NotificationContext";
 
@@ -35,7 +34,7 @@ export default function Navbar() {
           <div className="flex items-center space-x-3 rtl:space-x-reverse">
             <img
               className="w-13 h-13 rounded-2xl"
-              src={logoImg}
+              src="/public/eltaranisi.png"
               alt="Logo"
             />
             <span className="self-center text-xl text-[#0b1427] font-bold whitespace-nowrap">
