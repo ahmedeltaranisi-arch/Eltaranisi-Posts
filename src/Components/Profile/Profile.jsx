@@ -12,12 +12,13 @@ import CommentCard from "../CommentCard/CommentCard";
 import CreateCommentCard from "../CreateCommentCard/CreateCommentCard";
 import Spinner from "../Spinner/Spinner";
 import DropDownAction from "../DropDownAction/DropDownAction";
-import { Helmet } from "react-helmet";
+
 import {
   getSavedPostIds,
   isPostSaved,
   onBookmarksUpdated,
 } from "../../utils/bookmarkStorage";
+import { Helmet } from "react-helmet-async";
 
 /* =========================================================
    1. مكون المنشور (PostCard)
