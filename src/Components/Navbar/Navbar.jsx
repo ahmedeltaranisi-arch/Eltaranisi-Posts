@@ -34,7 +34,9 @@ export default function Navbar() {
           <div className="flex items-center space-x-3 rtl:space-x-reverse">
             <img
               className="w-13 h-13 rounded-2xl"
-              src="/public/eltaranisi.jpg"
+              git add .
+git commit -m "update logo"
+git pushsrc="/my-logo.png"
               alt="Logo"
             />
             <span className="self-center text-xl text-[#0b1427] font-bold whitespace-nowrap">
