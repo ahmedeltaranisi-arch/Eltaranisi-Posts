@@ -16,7 +16,6 @@ export default function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   // 3. حساب عدد الإشعارات غير المقروءة ديناميكياً
-  // استخدام '?.' لتجنب أي خطأ في حالة كانت المصفوفة غير محملة بعد
   const unreadCount = notifications?.filter((n) => !n.isRead)?.length || 0;
 
   function logOut() {
@@ -32,14 +31,13 @@ export default function Navbar() {
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3 lg:px-8">
           {/* Logo Section */}
           <div className="flex items-center space-x-3 rtl:space-x-reverse">
-            <div
-              className={`bg-[#002B9A] p-6 rounded-2xl inline-flex items-center justify-center ${className}`}
-            >
+            {/* تم إزالة ${className} وتعديل الأحجام لتناسب الـ Navbar */}
+            <div className="bg-[#002B9A] p-2 w-14 h-10 rounded-lg inline-flex items-center justify-center">
               <svg
                 viewBox="0 0 450 150"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-full h-full filter drop-shadow-(--shadow-spec)"
+                className="w-full h-full drop-shadow-md"
               >
                 <filter
                   id="shadow"
