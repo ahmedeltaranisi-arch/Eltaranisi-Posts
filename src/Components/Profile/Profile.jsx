@@ -17,7 +17,6 @@ import {
   isPostSaved,
   onBookmarksUpdated,
 } from "../../utils/bookmarkStorage";
-import { Helmet } from "react-helmet-async";
 
 /* =========================================================
    1. مكون المنشور (PostCard)
@@ -86,7 +85,7 @@ function PostCard({ post, isSinglePost = false, isBookmarked = false }) {
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 w-full mx-auto mb-5 overflow-hidden">
       <Helmet>
-          <title>  Profile | Eltaranisi Posts </title>
+        <title> Profile | Eltaranisi Posts </title>
       </Helmet>
 
       {/* Header */}
