@@ -16,7 +16,6 @@ export default function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   // 3. حساب عدد الإشعارات غير المقروءة ديناميكياً
-  // استخدام '?.' لتجنب أي خطأ في حالة كانت المصفوفة غير محملة بعد
   const unreadCount = notifications?.filter((n) => !n.isRead)?.length || 0;
 
   function logOut() {
@@ -29,15 +28,17 @@ export default function Navbar() {
   return (
     <>
       <nav className="sticky bg-white w-full z-20 top-0 start-0 border-b border-gray-100 shadow-sm">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3 lg:px-8">
+        {/* 🟢 flex-nowrap + بادينج أصغر في الموبايل عشان كل حاجة تفضل في سطر واحد */}
+        <div className="max-w-screen-xl flex flex-nowrap items-center justify-between mx-auto gap-2 p-2.5 sm:p-3 lg:px-8">
           {/* Logo Section */}
-          <div className="flex items-center space-x-3 rtl:space-x-reverse">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <img
-              className="w-13 h-13 rounded-2xl"
+              className="w-4 h-4 sm:w-13 sm:h-13 rounded-2xl"
               src="/my-logo.png"
               alt="Logo"
             />
-            <span className="self-center text-xl text-[#0b1427] font-bold whitespace-nowrap">
+            {/* 🟢 اسم الموقع مختفي في الموبايل ويظهر من sm فأكبر */}
+            <span className="hidden sm:inline self-center text-xl text-[#0b1427] font-bold whitespace-nowrap">
               Eltaranisi Posts
             </span>
           </div>
@@ -46,11 +47,12 @@ export default function Navbar() {
           {userToken !== null ? (
             <>
               {/* Navigation Pills (Center) */}
-              <div className="flex items-center bg-gray-50/80 border border-gray-200 rounded-full p-1 space-x-1 rtl:space-x-reverse mx-auto shadow-sm">
+              {/* 🟢 بادينج/سبيسينج أصغر في الموبايل + flex-shrink-0 عشان محدش يضغط عليها */}
+              <div className="flex items-center bg-gray-50/80 border border-gray-200 rounded-full p-1 gap-0.5 sm:space-x-1 rtl:space-x-reverse mx-auto shadow-sm shrink-0">
                 <NavLink
                   to="/home"
                   className={({ isActive }) =>
-                    `flex items-center gap-2 px-3 sm:px-5 py-2 rounded-full font-semibold transition-all ${
+                    `flex items-center gap-2 px-2.5 sm:px-5 py-2 rounded-full font-semibold transition-all ${
                       isActive
                         ? "text-blue-600 bg-white shadow-sm"
                         : "text-gray-600 hover:bg-gray-100"
@@ -76,7 +78,7 @@ export default function Navbar() {
                 <NavLink
                   to="/profile"
                   className={({ isActive }) =>
-                    `flex items-center gap-2 px-3 sm:px-5 py-2 rounded-full font-semibold transition-all ${
+                    `flex items-center gap-2 px-2.5 sm:px-5 py-2 rounded-full font-semibold transition-all ${
                       isActive
                         ? "text-blue-600 bg-white shadow-sm"
                         : "text-gray-600 hover:bg-gray-100"
@@ -103,7 +105,7 @@ export default function Navbar() {
                 <NavLink
                   to="/notifications"
                   className={({ isActive }) =>
-                    `flex items-center gap-2 px-3 sm:px-5 py-2 rounded-full font-semibold transition-all ${
+                    `flex items-center gap-2 px-2.5 sm:px-5 py-2 rounded-full font-semibold transition-all ${
                       isActive
                         ? "text-blue-600 bg-white shadow-sm"
                         : "text-gray-600 hover:bg-gray-100"
@@ -127,7 +129,7 @@ export default function Navbar() {
 
                     {/* 4. عرض الرقم الفعلي للإشعارات غير المقروءة */}
                     {unreadCount > 0 && (
-                      <span className="absolute -top-2 -right-3 bg-[#f5354e] text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full border-2 border-white flex items-center justify-center min-w-[20px] h-[20px]">
+                      <span className="absolute -top-1.5 -right-2 sm:-top-2 sm:-right-3 bg-[#f5354e] text-white text-[10px] sm:text-[11px] font-bold px-1.5 py-0.5 rounded-full border-2 border-white flex items-center justify-center min-w-[18px] h-[18px] sm:min-w-[20px] sm:h-[20px]">
                         {unreadCount > 99 ? "99+" : unreadCount}
                       </span>
                     )}
@@ -137,10 +139,11 @@ export default function Navbar() {
               </div>
 
               {/* User Dropdown Menu */}
-              <div className="relative">
+              <div className="relative shrink-0">
+                {/* 🟢 من غير برواز/خلفية واسم في الموبايل — أفاتار + أيقونة المنيو بس */}
                 <button
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  className="flex items-center gap-3 border border-gray-200 bg-gray-50/50 rounded-full p-1.5 pr-4 hover:bg-gray-100 transition-colors focus:outline-none"
+                  className="flex items-center gap-1.5 sm:gap-3 sm:border sm:border-gray-200 sm:bg-gray-50/50 rounded-full p-1 sm:p-1.5 sm:pr-4 hover:bg-gray-100 transition-colors focus:outline-none"
                 >
                   <img
                     src={
@@ -150,7 +153,7 @@ export default function Navbar() {
                     alt="Profile"
                     className="w-8 h-8 rounded-full object-cover"
                   />
-                  <span className="font-semibold text-[#2c3345]">
+                  <span className="hidden sm:inline font-semibold text-[#2c3345]">
                     {userData?.name || "Ahmed"}
                   </span>
                   <svg
@@ -231,7 +234,7 @@ export default function Navbar() {
             </>
           ) : (
             /* Logged out Navigation */
-            <ul className="flex items-center space-x-4 rtl:space-x-reverse font-semibold text-gray-600">
+            <ul className="flex items-center space-x-4 rtl:space-x-reverse font-semibold text-gray-600 shrink-0">
               <li>
                 <NavLink
                   to="/"
@@ -243,7 +246,7 @@ export default function Navbar() {
               <li>
                 <NavLink
                   to="/register"
-                  className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
+                  className="bg-blue-600 text-white px-3 sm:px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
                 >
                   Register
                 </NavLink>
