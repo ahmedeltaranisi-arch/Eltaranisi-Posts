@@ -33,7 +33,7 @@ export default function Navbar() {
           {/* Logo Section */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <img
-              className="w-4 h-4 sm:w-13 sm:h-13 rounded-2xl"
+              className="w-9 h-9 sm:w-13 sm:h-13 rounded-2xl"
               src="/my-logo.png"
               alt="Logo"
             />
